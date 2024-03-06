@@ -36,9 +36,8 @@ public class MerchantService {
 			merchantdb.setGstNo(merchant.getGstNo());
 			merchantdb.setName(merchant.getName());
 			merchantdb.setPassword(merchant.getPassword());
-			merchantdb.setPassword(merchant.getPassword());
 			merchantdb.setStatus(merchant.getStatus());
-			structure.setData(merchantDao.saveMarchant(merchant));
+			structure.setData(merchantDao.saveMarchant(merchantdb));
 			structure.setMessage("Updated merchant..........");
 			structure.setStatusCode(HttpStatus.ACCEPTED.value());
 			return structure;
@@ -89,6 +88,33 @@ public class MerchantService {
 	   structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 	   return structure;
    }
+   
+   public ResponseStructure<Merchant> verifyPhone(long phone,String password){
+	 ResponseStructure<Merchant> structure=new ResponseStructure<>();
+	   Optional<Merchant> recMerchant=merchantDao.verifyPhone(phone, password);
+	   if(recMerchant.isPresent()) {
+		   structure.setData(recMerchant.get());
+		   structure.setMessage("Merchant found......");
+		   structure.setStatusCode(HttpStatus.OK.value());
+		   return structure;
+	   }
+	   structure.setMessage("Invalid phone or password......");
+	   structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+	   return structure;
+   }
+   public ResponseStructure<Merchant> verifyEmail(String email,String password){
+		 ResponseStructure<Merchant> structure=new ResponseStructure<>();
+		   Optional<Merchant> recMerchant=merchantDao.verifyEmail(email, password);
+		   if(recMerchant.isPresent()) {
+			   structure.setData(recMerchant.get());
+			   structure.setMessage("Merchant found......");
+			   structure.setStatusCode(HttpStatus.OK.value());
+			   return structure;
+		   }
+		   structure.setMessage("Invalid phone or password......");
+		   structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		   return structure;
+	   }
 
 }
 

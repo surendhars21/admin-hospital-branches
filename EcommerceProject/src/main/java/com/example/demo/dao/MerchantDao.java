@@ -33,4 +33,11 @@ public class MerchantDao {
 	public List<Merchant> findAll(){
 		return repository.findAll();
 	}
+	
+	public Optional<Merchant> verifyPhone(long phone,String password){
+		return repository.verifyPhone(phone, password);
+	}
+	public Optional<Merchant> verifyEmail(String email,String password){
+		return repository.verifyEmail(email, password);
+	}
 }

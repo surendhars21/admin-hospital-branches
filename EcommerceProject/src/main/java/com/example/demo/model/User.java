@@ -1,33 +1,24 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Data
 @Getter
 @Setter
-public class Merchant {
-
+public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(nullable=false)
 	private String name;
-	@Column(nullable=false,unique=true)
-	private long phone;
-	@Column(nullable=false,unique=true)
-	private String gstNo;
-	@Column(nullable=false,unique=true)
 	private String email;
-	@Column(nullable=false)
+	private long phone;
+	private String gender;
+	private int age;
 	private String password;
 	private String status;
-
 }
